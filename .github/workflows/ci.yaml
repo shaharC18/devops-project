@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Build and start the app
+        run: docker compose up -d --build --wait
+
+      - name: Check the home page
+        run: curl --fail --retry 5 --retry-connrefused --retry-delay 2 http://localhost:8000/
+
+      - name: Add a task
+        run: curl --fail -X POST "http://localhost:8000/tasks?title=from-ci"
+
+      - name: List tasks
+        run: curl --fail http://localhost:8000/tasks
+
+      - name: Show logs if something failed
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop
+        if: always()
+        run: docker compose down

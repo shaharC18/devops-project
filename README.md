@@ -5,20 +5,27 @@ A small Tasks API that goes through the full DevOps lifecycle.
 
 ## Tech Stack
 - Python + FastAPI
-- Docker
+- PostgreSQL
+- Docker + Docker Compose
 - Git + GitHub
 
-## Run with Docker
-docker build -t tasks-api .
-docker run -d --rm --name tasks -p 8000:8000 tasks-api
+## Run
+```
+docker compose up -d --build
+```
 
 Then open: http://127.0.0.1:8000/docs
+
+Stop:
+```
+docker compose down
+```
 
 ## Roadmap
 - [x] Environment, Git and GitHub
 - [x] Tasks API (FastAPI)
 - [x] Docker
-- [ ] Docker Compose + PostgreSQL
+- [x] Docker Compose + PostgreSQL
 - [ ] CI with GitHub Actions
 - [ ] Kubernetes
 - [ ] Terraform

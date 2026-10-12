@@ -19,7 +19,7 @@ def home():
 @app.get("/tasks")
 def get_tasks():
     with psycopg.connect(DATABASE_URL) as conn:
-        rows = conn.execute("SELECT id, title FROM taskz ORDER BY id").fetchall()
+        rows = conn.execute("SELECT id, title FROM tasks ORDER BY id").fetchall()
     return [{"id": row[0], "title": row[1]} for row in rows]
 
 

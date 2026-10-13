@@ -1,0 +1,10 @@
+groups:
+  - name: tasks-api
+    rules:
+      - alert: ApiDown
+        expr: up{job="tasks-api"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tasks API is down"

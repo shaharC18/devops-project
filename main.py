@@ -2,6 +2,7 @@ import os
 
 import psycopg
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 
 DATABASE_URL = os.environ["DATABASE_URL"]
 
@@ -9,6 +10,7 @@ with psycopg.connect(DATABASE_URL) as conn:
     conn.execute("CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, title TEXT NOT NULL)")
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/")

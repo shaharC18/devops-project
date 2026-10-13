@@ -9,13 +9,20 @@ A small Tasks API that goes through the full DevOps lifecycle.
 - Docker + Docker Compose
 - GitHub Actions (CI + publish to GitHub Container Registry)
 - Kubernetes
+- Terraform
+- Prometheus + Grafana
 
 ## Run with Docker Compose
 ```
 docker compose up -d --build
 ```
 
-Then open: http://127.0.0.1:8000/docs
+| Service    | URL                           |
+|------------|-------------------------------|
+| API docs   | http://127.0.0.1:8000/docs    |
+| Metrics    | http://127.0.0.1:8000/metrics |
+| Prometheus | http://127.0.0.1:9090         |
+| Grafana    | http://127.0.0.1:3000         |
 
 ## Run on Kubernetes
 ```
@@ -32,6 +39,6 @@ Then open: http://127.0.0.1:8080/docs
 - [x] Docker Compose + PostgreSQL
 - [x] CI with GitHub Actions
 - [x] Kubernetes
-- [ ] Terraform
-- [ ] Monitoring (Prometheus + Grafana)
+- [x] Terraform
+- [x] Monitoring (Prometheus + Grafana)
 - [ ] GitOps (Argo CD)

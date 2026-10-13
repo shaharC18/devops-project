@@ -7,27 +7,31 @@ A small Tasks API that goes through the full DevOps lifecycle.
 - Python + FastAPI
 - PostgreSQL
 - Docker + Docker Compose
-- Git + GitHub
+- GitHub Actions (CI + publish to GitHub Container Registry)
+- Kubernetes
 
-## Run
+## Run with Docker Compose
 ```
 docker compose up -d --build
 ```
 
 Then open: http://127.0.0.1:8000/docs
 
-Stop:
+## Run on Kubernetes
 ```
-docker compose down
+kubectl apply -f k8s
+kubectl port-forward svc/api 8080:8000
 ```
+
+Then open: http://127.0.0.1:8080/docs
 
 ## Roadmap
 - [x] Environment, Git and GitHub
 - [x] Tasks API (FastAPI)
 - [x] Docker
 - [x] Docker Compose + PostgreSQL
-- [ ] CI with GitHub Actions
-- [ ] Kubernetes
+- [x] CI with GitHub Actions
+- [x] Kubernetes
 - [ ] Terraform
 - [ ] Monitoring (Prometheus + Grafana)
 - [ ] GitOps (Argo CD)

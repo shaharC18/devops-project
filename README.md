@@ -11,6 +11,7 @@ A small Tasks API that goes through the full DevOps lifecycle.
 - Kubernetes
 - Terraform
 - Prometheus + Grafana
+- Argo CD (GitOps)
 
 ## Run with Docker Compose
 ```
@@ -24,13 +25,22 @@ docker compose up -d --build
 | Prometheus | http://127.0.0.1:9090         |
 | Grafana    | http://127.0.0.1:3000         |
 
-## Run on Kubernetes
+## Run on Kubernetes with Argo CD (GitOps)
+Install Argo CD and register the app once:
 ```
-kubectl apply -f k8s
-kubectl port-forward svc/api 8080:8000
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.6/manifests/install.yaml
+kubectl apply -f argocd/app.yaml
 ```
 
-Then open: http://127.0.0.1:8080/docs
+From now on, every merge to `main` that changes `k8s/` is deployed automatically.
+
+## How a change reaches production
+1. Create a branch and open a Pull Request
+2. GitHub Actions builds and tests the app
+3. Merge to `main`
+4. GitHub Actions publishes the image to `ghcr.io`
+5. Argo CD syncs the cluster to match Git
 
 ## Roadmap
 - [x] Environment, Git and GitHub
@@ -41,4 +51,4 @@ Then open: http://127.0.0.1:8080/docs
 - [x] Kubernetes
 - [x] Terraform
 - [x] Monitoring (Prometheus + Grafana)
-- [ ] GitOps (Argo CD)
+- [x] GitOps (Argo CD)

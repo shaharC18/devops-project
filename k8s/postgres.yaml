@@ -14,7 +14,7 @@ kind: Deployment
 metadata:
   name: db
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: Recreate
   selector:
